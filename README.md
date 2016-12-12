@@ -17,9 +17,9 @@ Mongoose validates the structure and normalizes data that is persisted in Mongo.
 <!-- specific/measurable goal for students to achieve -->
 *After this workshop, developers will be able to:*
 
-- Differentiate and relate the concepts of schemas and models in Mongoose.
-- Create Mongoose schemas & models and use Mongoose model instances.
-- Describe the relationship between Mongoose with Express and integrate the two in their projects.
+- Describe the relationship between schemas and models in Mongoose.
+- Create Mongoose model instances.
+- Using Mongoose, integrate a MongoDB database with an Express project.
 
 
 ### Where should we be now?
