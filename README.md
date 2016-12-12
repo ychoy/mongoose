@@ -11,7 +11,6 @@ Market: SF
 <!-- framing the "why" in big-picture/real world examples -->
 *This workshop is important because:*th
 
-Mongoose validates the structure and normalizes data that is persisted in Mongo.
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
@@ -347,7 +346,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
 </details>
 
 ## Independent Practice
-Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-31/mongoose-books-app)
+Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-34/mongoose-books-app)
 
 ## Closing Thoughts
 - Why is Mongoose useful?
