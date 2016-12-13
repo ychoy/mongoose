@@ -187,10 +187,12 @@ The schema is useless by itself.  Let's create a model so we can start interacti
   var Person = require('./models/person');
 ```
 
-Now in the console file (fixing any errors you get), try making a single instance of a Person with the code below:
+Run `node console.js` to enter into a REPL that's connected with the database.  You can take a look at the code if you want to, but know that we won't use this system often. It's a handy way to test out some new Mongoose methods. 
+
+Now in the console that opens, try making a single instance of a Person with the code below:
 
 ```js
-  var ilias = new Person({
+  var ilias = new db.Person({
       firstName: "Ilias",
       lastName: "Tsangaris",
       height: 6.0,
