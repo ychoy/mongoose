@@ -98,7 +98,7 @@ Let's do a quick activity and get Mongoose and MongoDB running.
     npm install --save mongoose
   ```
 
-2. Next we need to `require` Mongoose in our project and `connect` to the MongoDB service (it could be local or hosted). We can do this in `server.js` for now. Later we'll do it in `models/index.js`.
+2. Next we need to `require` Mongoose in our project and `connect` to the MongoDB service (it could be local or hosted). We can do this in `server.js`, or separate the code a little more by using a `models` directory and connecting everything in `models/index.js`.
 
   ```js
     var mongoose = require('mongoose');
@@ -144,13 +144,27 @@ Once you've finished the above steps, here's how you would set up an Express app
 </details>
 
 3. <details>
-  <summary>In `server.js`, require your model.</summary>
+  <summary>In `models/index.js`, require your model.</summary>
   ```js
-  // server.js
-  // Note without requiring your models you can't use them in server.js!
-  var Todo = require('./models/todo');
+  // models/index.js
+  // require runs the code from the given file and returns its exports
+  var Todo = require('./todo');
   ```
-</details>
+  </details>
+
+3. <details>
+  <summary>Next in `models/index.js`, export the new model.</summary>
+  ```js
+  // models/index.js
+  // require runs the code from the given file and returns its exports
+  var Todo = require('./todo');
+  // NEW LINE:
+  exports.Todo = Todo;
+  ```
+  
+  This will allow us to use the `Todo` model in `server.js`.
+  </details>
+
 
 #### Database IDs and data-types
 
@@ -256,7 +270,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
   // get all todos
   app.get('/api/todos', function(req, res) {
     // find all todos in db
-    Todo.find({}, function(err, allTodos) {
+    db.Todo.find({}, function(err, allTodos) {
       res.json({ todos: allTodos });
     });
   });
@@ -274,7 +288,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
   // create new todo
   app.post('/api/todos', function(req, res) {
     // create new todo with form data (`req.body`)
-    var newTodo = new Todo(req.body);
+    var newTodo = new db.Todo(req.body);
 
     // save new todo in db
     newTodo.save(function(err, savedTodo) {
@@ -295,7 +309,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id
-    Todo.findOne({ _id: todoId }, function(err, foundTodo) {
+    db.Todo.findOne({ _id: todoId }, function(err, foundTodo) {
       res.json(foundTodo);
     });
   });
@@ -315,7 +329,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id
-    Todo.findOne({ _id: todoId }, function(err, foundTodo) {
+    db.Todo.findOne({ _id: todoId }, function(err, foundTodo) {
       // update the todos's attributes
       foundTodo.task = req.body.task;
       foundTodo.description = req.body.description;
@@ -340,7 +354,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id and remove
-    Todo.findOneAndRemove({ _id: todoId }, function(err, deletedTodo) {
+    db.Todo.findOneAndRemove({ _id: todoId }, function(err, deletedTodo) {
       res.json(deletedTodo);
     });
   });
