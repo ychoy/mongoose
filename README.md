@@ -127,7 +127,7 @@ Once you've finished the above steps, here's how you would set up an Express app
 1. We'll need a `Todo` model, which we will set up in a file called `todo.js`....
 
 2. <details>
-  <summary>In your model file (e.g. `todo.js`), create the model **schema**, and export it so that you can require it in other parts of your app.</summary>
+  <summary>In your model file (e.g. `todo.js`), create the model **schema**, use it to make a **model**, and export the model so that you can require it in other parts of your app.</summary>
   ```js
   var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
