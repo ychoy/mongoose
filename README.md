@@ -187,7 +187,7 @@ Once you've finished the above steps, here's how you would set up an Express app
 
 Most databases also require that we specify the data type for each attribute.  In mongoose we can use data types from JavaScript, such as String, Number, and even Array. Here's a list of all the [available data-types](http://mongoosejs.com/docs/schematypes.html) in mongoose.
 
-Let's look at this example, using the `console.js` file to help us interact with our database.
+Let's look at this example from the starter-code for these notes. 
 
 ```js
 // models/person.js
@@ -242,9 +242,13 @@ Here's a slightly more complex example using the structure with a `models/index.
 
 ### Using the Model
 
-Run `node console.js` to enter into a REPL that's connected with the database.  You can take a look at the code if you want to, but know that we won't use this system often. It's a handy way to test out some new Mongoose methods. 
+Instead of setting up a full server, we'll use a simple script to experiment with some Mongoose methods.  You can see the code for the script in `console.js`. Note that it does `require` the models. It sets up a REPL (read-evaluate-print-loop) that you can use to  interact with the database.  
 
-Now in the REPL that opens, try making a single instance of a Person with the code below:
+1. Make sure `mongod` is running in a tab of Terminal.
+
+1. In another tab, run `node console.js` to enter the REPL.  
+
+Now in the REPL that opens, try making a single instance of a person with the code below:
 
 ```js
   var ilias = new db.Person({
