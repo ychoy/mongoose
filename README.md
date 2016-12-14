@@ -209,18 +209,42 @@ module.exports = Person;
 
 ```
 
-In the above, note how we've assigned **String**, **Number** and even a **Boolean** as the data types for this Schema.
+> In the above, note how we've assigned **String**, **Number** and even a **Boolean** as the data types for this Schema.
 
-The schema is useless by itself.  Let's create a model so we can start interacting with data.
+
+Once the model object is exported from its individual file, you'll want to `require` it to use it in another file. 
+
+Here's an example of how we could require the model directly into a server file:
 
 ```js
-  // models/index.js
+  // server.js
   var Person = require('./models/person');
+  // now Person stores the Person model from the other file!
 ```
+  
+Here's a slightly more complex example using the structure with a `models/index.js` file to group together all the models:
+```js
+  // models/index.js
+  var PersonModel = require('./models/person');
+  module.exports = {
+    Person: PersonModel
+  }
+  // or
+  // module.exports.Person = PersonModel;
+```
+... and in `server.js`:
+```js
+  // server.js
+  var db = require(`./models`); // grab the export object from models/index.js
+  // now db.Person stores the Person model from the models/person.js file
+```
+
+
+### Using the Model
 
 Run `node console.js` to enter into a REPL that's connected with the database.  You can take a look at the code if you want to, but know that we won't use this system often. It's a handy way to test out some new Mongoose methods. 
 
-Now in the console that opens, try making a single instance of a Person with the code below:
+Now in the REPL that opens, try making a single instance of a Person with the code below:
 
 ```js
   var ilias = new db.Person({
