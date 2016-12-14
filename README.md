@@ -10,7 +10,7 @@ Market: SF
 
 ### Warmup
 
-Fill in the express project file structure organizer.  For each file or directory on the sheet, list:
+Fill in the express project file structure organizer (printed sheet).  For each file or directory on the sheet, list:
 - a short summary of the purpose of the file or directory
 - whether the file or directory is most related to the client, the server, or the database
 
