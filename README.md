@@ -1,5 +1,6 @@
 <!--
 Creator: Cory Fauver
+Last Edited By: Brianna Veenstra (WDI34)
 Market: SF
 -->
 
@@ -7,9 +8,25 @@ Market: SF
 
 # Mongoose
 
+### Warmup
+
+Fill in the express project file structure organizer.  For each file or directory on the sheet, list:
+- a short summary of the purpose of the file or directory
+- whether the file or directory is most related to the client, the server, or the database
+
+You won't know what some of the database files do yet, but that's okay. Make notes about them as you see them come up today.
+
+[Here's a link to a filled-in sheet where you can add comments if you'd like.](https://docs.google.com/document/d/1HQwKMzNMf6Rn80n-32cTEtDi4wgkxPQV5WdpDw36PhI/edit?usp=sharing)
+
 ### Why is this important?
 <!-- framing the "why" in big-picture/real world examples -->
-*This workshop is important because:*th
+*This workshop is important because:*
+
+We want user data that lasts (or "persists") even when we make changes to the code on our servers! Databases will give us more power to store persistent data even when servers restart. 
+
+There are *many* kinds of databases that are optimized for different things.  We'll start with MongoDB. MongoDB is a widely-used noSQL database, and using it will help you understand how many databases work. 
+
+We'll also take advantage of Mongoose, a library that makes it easier to use MongoDB with express projects. 
 
 
 ### What are the objectives?
@@ -32,7 +49,7 @@ Market: SF
 
 ![tumblr_nbhme6bafu1s02vreo1_500](https://cloud.githubusercontent.com/assets/4304660/16811532/b08865a8-48dd-11e6-9474-c114b2e8a00d.gif)
 
-`MongoDB` is a no-SQL database. It is responsible for storing data in containers and making sure that the data is safe and organized. MongoDB stores data in BSON, "a binary JSON format." We'll see SQL databases later that store data in a format more like an Excel spreadsheet. 
+`MongoDB` is a no-SQL database. It is responsible for storing data in containers and making sure that the data is safe and organized. MongoDB stores data in BSON, "a binary JSON format", and it has a JavaScript API. We'll see SQL databases later that store data in a format more like an Excel spreadsheet. 
 
 `Mongoose` is a library or "wrapper" that gives us a bunch of convenience methods for working with MongoDB records (kind of like jQuery's convenience methods for manipulating the DOM). Generally we will not be interacting _directly_ with MongoDB, instead we'll be working through `mongoose`.
 
