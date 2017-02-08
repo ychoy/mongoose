@@ -408,7 +408,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
 </details>
 
 ## Independent Practice
-Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-34/mongoose-books-app)
+Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-labs/mongoose-books-app)
 
 ## Closing Thoughts
 - Why is Mongoose useful?
