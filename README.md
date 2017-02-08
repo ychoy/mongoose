@@ -1,5 +1,6 @@
 <!--
 Creator: Cory Fauver
+Last Edited By: Brianna Veenstra (WDI34)
 Market: SF
 -->
 
@@ -7,19 +8,34 @@ Market: SF
 
 # Mongoose
 
+### Warmup
+
+Fill in the express project file structure organizer (printed sheet).  For each file or directory on the sheet, list:
+- a short summary of the purpose of the file or directory
+- whether the file or directory is most related to the client, the server, or the database
+
+You won't know what some of the database files do yet, but that's okay. Make notes about them as you see them come up today.
+
+[Here's a link to a filled-in sheet where you can add comments if you'd like.](https://docs.google.com/document/d/1HQwKMzNMf6Rn80n-32cTEtDi4wgkxPQV5WdpDw36PhI/edit?usp=sharing)
+
 ### Why is this important?
 <!-- framing the "why" in big-picture/real world examples -->
-*This workshop is important because:*th
+*This workshop is important because:*
 
-Mongoose validates the structure and normalizes data that is persisted in Mongo.
+We want user data that lasts (or "persists") even when we make changes to the code on our servers! Databases will give us more power to store persistent data even when servers restart. 
+
+There are *many* kinds of databases that are optimized for different things.  We'll start with MongoDB. MongoDB is a widely-used noSQL database, and using it will help you understand how many databases work. 
+
+We'll also take advantage of Mongoose, a library that makes it easier to use MongoDB with express projects. 
+
 
 ### What are the objectives?
 <!-- specific/measurable goal for students to achieve -->
 *After this workshop, developers will be able to:*
 
-- Differentiate and relate the concepts of schemas and models in Mongoose.
-- Create Mongoose schemas & models and use Mongoose model instances.
-- Describe the relationship between Mongoose with Express and integrate the two in their projects.
+- Describe the relationship between schemas and models in Mongoose.
+- Create Mongoose model instances.
+- Using Mongoose, integrate a MongoDB database with an Express project.
 
 
 ### Where should we be now?
@@ -29,17 +45,20 @@ Mongoose validates the structure and normalizes data that is persisted in Mongo.
 - Use Express to configure a server's responses to various HTTP verbs on various routes.
 - access data that comes in on a request from the client-side (`req.body` or `req.params`).
 
-## Compare and contrast Mongo and Mongoose?
+## MongoDB versus Mongoose
 
 ![tumblr_nbhme6bafu1s02vreo1_500](https://cloud.githubusercontent.com/assets/4304660/16811532/b08865a8-48dd-11e6-9474-c114b2e8a00d.gif)
 
-`MongoDB` is a no-SQL database. It is responsible for putting data in containers and making sure that the data is safe and organized. `Mongoose` is a library or "wrapper" that gives us a bunch of convenience methods for working with MongoDB records (kind of like jQuery's convenience methods for manipulating the DOM). Generally we will not be interacting _directly_ with MongoDB, instead we'll be working through `mongoose`.
+`MongoDB` is a no-SQL database. It is responsible for storing data in containers and making sure that the data is safe and organized. MongoDB stores data in BSON, "a binary JSON format", and it has a JavaScript API. We'll see SQL databases later that store data in a format more like an Excel spreadsheet. 
+
+`Mongoose` is a library or "wrapper" that gives us a bunch of convenience methods for working with MongoDB records (kind of like jQuery's convenience methods for manipulating the DOM). Generally we will not be interacting _directly_ with MongoDB, instead we'll be working through `mongoose`.
 
 <details><summary>Side-note: Wondering what makes noSQL different from SQL? (we'll talk more about this later)</summary>
 
 There are two main categories of databases: relational (SQL) databases, and non-relational (no-SQL) databases. Mongo is a no-SQL database that stores entries in a JSON-like format.
 
-Since Mongo is the first database we've worked with it's hard for us to discuss the tradeoffs between SQL/no-SQL. But here's a great analogy from a fellow on StackOverflow:
+Since MongoDB is the first database we've worked with it's hard for us to discuss the tradeoffs between SQL/no-SQL. But here's a great analogy from StackOverflow:
+
 > "NoSQL databases store information like you would recipes in a book. When you want to know how to make a cake, you go to that recipe, and all of the information about how to make that cake (ingredients, preparation, mixing, baking, finishing, etc.) are all on that one page.
 >
 > SQL is like shopping for the ingredients for the recipe. In order to get all of your ingredients into your cart, you have to go to many different aisles to get each ingredient. When you are done shopping, your grocery cart will be full of all the ingredients you had to run around and collect.
@@ -53,7 +72,7 @@ Since Mongo is the first database we've worked with it's hard for us to discuss 
 
 ## Schemas and Models
 
-Mongoose presents us with two key concepts for how we create and store data in our Mongo database.
+Mongoose presents us with two key concepts for how we create and store data in our MongoDB database.
 
 **[Schema](http://mongoosejs.com/docs/guide.html)**: A Schema is a diagram or blueprint for what every object in the noSQL database will contain. It does not include any methods, just placeholders for what data you will eventually store. Here's an example of a simple Address Book mongoose schema:
 
@@ -78,27 +97,25 @@ var Contact = mongoose.model('Contact', ContactSchema);
 
 > In mongoose, a schema represents the structure of a particular document, either completely or just a portion of the document. It's a way to express expected properties and values as well as constraints and indexes. A model defines a programming interface for interacting with the database (read, insert, update, etc). So a schema answers "what will the data in this collection look like?" and a model provides functionality like "Are there any records matching this query?" or "Add a new document to the collection".
 
-> *[Source: Peter Lyons on stackoverflow](http://stackoverflow.com/questions/22950282/mongoose-schema-vs-model/22950402#22950402)*
-
-
+> *[Source: Peter Lyons on StackOverflow](http://stackoverflow.com/questions/22950282/mongoose-schema-vs-model/22950402#22950402)*
 
 ![image](https://i.chzbgr.com/full/7986468352/hE55E1B66/)
 
-Factory metaphor: Imagine a factory that has a mold for making rubber ducks. The mold would be the Schema. The machine that is capable of putting the different colored plastic into the mold, pressing it, and delivering a new toy to the world would be the model. The toy itself would be the data that would now be stored in some packaging in your database.
+Factory metaphor: Imagine a factory that has a mold for making rubber ducks. The mold would be the Schema. The machine that is capable of putting the different colored plastic into the mold, pressing it, and delivering a new toy to the world would be the model. The toy itself would be the data that would now be stored in your database.
 
 ![image](https://cloud.githubusercontent.com/assets/6520345/18133637/3e2d48e0-6f50-11e6-80c7-0336334d8c91.png)
 
-## Mongo & Mongoose setup
+## MongoDB & Mongoose setup
 
-Let's do a quick activity and get Mongoose and Mongo setup on our machines.
+Let's do a quick activity and get Mongoose and MongoDB running.
 
-1. Assuming you already have MongoDB installed (you did this at installfest), to get started using mongoose in a project, we have to install it in our `package.json`:
+1. Assuming you already have MongoDB installed (you did this at installfest), to get started using mongoose in a project, we have to install it to add it to a project's `package.json`:
 
   ```bash
     npm install --save mongoose
   ```
 
-2. Next we need to `require` Mongoose in our project and `connect` to the MongoDB service (it could be local or hosted). We can do this in `server.js` for now. Later we'll do it in `models/index.js`.
+2. Next we need to `require` Mongoose in our project and `connect` to the MongoDB service (it could be local or hosted). We can do this in `server.js`, or separate the code a little more by using a `models` directory and connecting everything in `models/index.js`.
 
   ```js
     var mongoose = require('mongoose');
@@ -124,10 +141,10 @@ Running your MongoDB service is no different from running your Express Server!
 ## Todo App Integration
 Once you've finished the above steps, here's how you would set up an Express application with a "Todo" model (so we can start CRUDing todos!). Look in the directory `starter-code` for a starting point.
 
-1. We'll need a `Todo` model, which we will call `todo.js`...
+1. We'll need a `Todo` model, which we will set up in a file called `todo.js`....
 
 2. <details>
-  <summary>In your model file (e.g. `todo.js`), create the model **schema**, and export it so that you can require it in other parts of your app.</summary>
+  <summary>In your model file (e.g. `todo.js`), create the model **schema**, use it to make a **model**, and export the model so that you can require it in other parts of your app.</summary>
   ```js
   var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
@@ -144,19 +161,33 @@ Once you've finished the above steps, here's how you would set up an Express app
 </details>
 
 3. <details>
-  <summary>In `server.js`, require your model.</summary>
+  <summary>In `models/index.js`, require your model.</summary>
   ```js
-  // server.js
-  // Note without requiring your models you can't use them in server.js!
-  var Todo = require('./models/todo');
+  // models/index.js
+  // require runs the code from the given file and returns its exports
+  var Todo = require('./todo');
   ```
-</details>
+  </details>
+
+3. <details>
+  <summary>Next in `models/index.js`, export the new model.</summary>
+  ```js
+  // models/index.js
+  // require runs the code from the given file and returns its exports
+  var Todo = require('./todo');
+  // NEW LINE:
+  exports.Todo = Todo;
+  ```
+  
+  This will allow us to use the `Todo` model in `server.js`.
+  </details>
+
 
 #### Database IDs and data-types
 
-Most databases also require that we specify the data-type for each attribute.  In mongoose we can use data-types from javascript such as String, Number, and even Array. Here's a list of all the [available data-types](http://mongoosejs.com/docs/schematypes.html).
+Most databases also require that we specify the data type for each attribute.  In mongoose we can use data types from JavaScript, such as String, Number, and even Array. Here's a list of all the [available data-types](http://mongoosejs.com/docs/schematypes.html) in mongoose.
 
-Let's look at this example, using the `console.js` file to help us interact with our database.
+Let's look at this example from the starter-code for these notes. 
 
 ```js
 // models/person.js
@@ -178,19 +209,49 @@ module.exports = Person;
 
 ```
 
-In the above note how we've assigned **String**, **Number** and even a **Boolean** as the data-types for this Schema.
+> In the above, note how we've assigned **String**, **Number** and even a **Boolean** as the data types for this Schema.
 
-Let's create an instance of this model.
 
+Once the model object is exported from its individual file, you'll want to `require` it to use it in another file. 
+
+Here's an example of how we could require the model directly into a server file:
+
+```js
+  // server.js
+  var Person = require('./models/person');
+  // now Person stores the Person model from the other file!
+```
+  
+Here's a slightly more complex example using the structure with a `models/index.js` file to group together all the models:
 ```js
   // models/index.js
-  var Person = require('./models/person');
+  var PersonModel = require('./models/person');
+  module.exports = {
+    Person: PersonModel
+  }
+  // or
+  // module.exports.Person = PersonModel;
+```
+... and in `server.js`:
+```js
+  // server.js
+  var db = require(`./models`); // grab the export object from models/index.js
+  // now db.Person stores the Person model from the models/person.js file
 ```
 
-Now let's the console file (fixing any errors you get) and try the below code:
+
+### Using the Model
+
+Instead of setting up a full server, we'll use a simple script to experiment with some Mongoose methods.  You can see the code for the script in `console.js`. Note that it does `require` the models. It sets up a REPL (read-evaluate-print-loop) that you can use to  interact with the database.  
+
+1. Make sure `mongod` is running in a tab of Terminal.
+
+1. In another tab, run `node console.js` to enter the REPL.  
+
+Now in the REPL that opens, try making a single instance of a person with the code below:
 
 ```js
-  var ilias = new Person({
+  var ilias = new db.Person({
       firstName: "Ilias",
       lastName: "Tsangaris",
       height: 6.0,
@@ -220,11 +281,11 @@ saved new person:  {
 
 ```
 
->Note: Every model instance that we store in the database is assigned an ID. In Mongo there will be a key of `_id` with a 24 character string.  We can use this ID later to look up a particular record. Later on we'll look at how we can use those IDs can help us form relationships in the database.
+>Note: Every model instance that we store in the database is assigned an ID. In MongoDB, IDs have a key of `_id` and a value that is a 24-character string.  We can use this ID later to look up a particular record. Later on we'll look at how we can use those IDs can help us form relationships in the database.
 
 ## CRUD Operations with Mongoose
 
-Yesterday, when we wanted to access or manipulate stored data, we worked with an array. We were sending along the whole array, finding single objects in an array, adding objects to an array, and deleting elements from an array.
+Until now, when we wanted to access or manipulate stored data on our server, we worked with an array. We were sending around the whole array, finding single objects in an array, adding objects to an array, and deleting elements from an array.
 
 <details>
   <summary>At what API route did we complete each of the above?</summary>
@@ -244,7 +305,7 @@ Yesterday, when we wanted to access or manipulate stored data, we worked with an
 </details>
 
 
-Luckily, Mongoose provides methods to access the database data which will help us accomplish the same work as yesterday.
+Luckily, Mongoose provides methods to access the database data which will help us accomplish these tasks.
 
 #### Get all todos: `.find()`
 
@@ -254,7 +315,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
   // get all todos
   app.get('/api/todos', function(req, res) {
     // find all todos in db
-    Todo.find({}, function(err, allTodos) {
+    db.Todo.find({}, function(err, allTodos) {
       res.json({ todos: allTodos });
     });
   });
@@ -272,7 +333,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
   // create new todo
   app.post('/api/todos', function(req, res) {
     // create new todo with form data (`req.body`)
-    var newTodo = new Todo(req.body);
+    var newTodo = new db.Todo(req.body);
 
     // save new todo in db
     newTodo.save(function(err, savedTodo) {
@@ -293,7 +354,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id
-    Todo.findOne({ _id: todoId }, function(err, foundTodo) {
+    db.Todo.findOne({ _id: todoId }, function(err, foundTodo) {
       res.json(foundTodo);
     });
   });
@@ -313,7 +374,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id
-    Todo.findOne({ _id: todoId }, function(err, foundTodo) {
+    db.Todo.findOne({ _id: todoId }, function(err, foundTodo) {
       // update the todos's attributes
       foundTodo.task = req.body.task;
       foundTodo.description = req.body.description;
@@ -338,7 +399,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
     var todoId = req.params.id;
 
     // find todo in db by id and remove
-    Todo.findOneAndRemove({ _id: todoId }, function(err, deletedTodo) {
+    db.Todo.findOneAndRemove({ _id: todoId }, function(err, deletedTodo) {
       res.json(deletedTodo);
     });
   });
@@ -347,7 +408,7 @@ Luckily, Mongoose provides methods to access the database data which will help u
 </details>
 
 ## Independent Practice
-Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-31/mongoose-books-app)
+Practice the skills covered in this workshop with the [Mongoose books training](https://github.com/sf-wdi-34/mongoose-books-app)
 
 ## Closing Thoughts
 - Why is Mongoose useful?
